@@ -1,8 +1,35 @@
+"use client";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { getPrograms } from "../../../config/apis";
 
 export default function Programs() {
+
+   const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["programs"],
+    queryFn: ({ pageParam = 1 }) => get
+    ({ page: pageParam }),
+    getNextPageParam: (lastPage) =>
+      lastPage.page < lastPage.pages ? lastPage.page + 1 : undefined,
+    enabled: true,
+  });
+
+
+  console.log(data)
+
+  if(isLoading){
+    return <p>Loading...</p>
+  }
+
   return (
     <main>
       {/* Hero Banner */}

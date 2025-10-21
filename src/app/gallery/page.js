@@ -5,6 +5,9 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 
 export default function GallerySection() {
+
+
+  
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
