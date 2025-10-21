@@ -46,7 +46,7 @@ export default function ExecutiveSection() {
       </section>
 
       {/* Executive Members Section */}
-      <section className="w-full py-20 bg-gradient-to-b from-green-50 to-white">
+      <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2
             className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"

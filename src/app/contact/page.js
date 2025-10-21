@@ -17,7 +17,7 @@ export default function ContactForm() {
         <div className="p-8 md:p-12">
           {/* Heading */}
           <h1
-            className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3 text-center text-green-700"
+            className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3 text-center"
             data-aos="fade-down"
           >
             Get in Touch
