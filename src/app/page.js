@@ -5,11 +5,51 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+//  swiper slider imports
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 export default function HomePage() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  const newsItems = [
+    {
+      title: "Youth Summit 2025",
+      desc: "Highlights from our national youth summit and future initiatives for leadership growth.",
+      img: "/images/home/bg2.jpg",
+      link: "/news",
+    },
+    {
+      title: "Community Outreach Program",
+      desc: "Empowering youth through community service and leadership engagement.",
+      img: "/images/home/bg2.jpg",
+      link: "/news",
+    },
+    {
+      title: "Tech Innovation Workshop",
+      desc: "A hands-on experience to promote digital innovation among young leaders.",
+      img: "/images/home/bg2.jpg",
+      link: "/news",
+    },
+    {
+      title: "Cultural Exchange Event",
+      desc: "Bringing together youth from different regions to celebrate diversity.",
+      img: "/images/home/bg2.jpg",
+      link: "/news",
+    },
+    {
+      title: "Green Future Drive",
+      desc: "Initiatives for environmental awareness and sustainability projects.",
+      img: "/images/home/bg2.jpg",
+      link: "/news",
+    },
+  ];
   return (
     <main>
 
@@ -23,7 +63,7 @@ export default function HomePage() {
         </div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/70"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col items-center text-center" data-aos="fade-up">
@@ -48,7 +88,7 @@ export default function HomePage() {
       </section>
 
       {/* ******************** ABOUT *********************** */}
-      <section className="w-full py-20 bg-gradient-to-r from-green-50 via-[#FAF3DD] to-green-50">
+      <section className="w-full py-20 bg-linear-to-r from-green-50 via-[#FAF3DD] to-green-50">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 flex flex-col gap-6" data-aos="fade-up">
             <span className="inline-block bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium tracking-wide w-fit">
@@ -253,7 +293,7 @@ export default function HomePage() {
     {[1, 2, 3, 4, 5, 6].map((num) => (
       <div
         key={num}
-        className="relative group flex-grow transition-all w-56 rounded-lg overflow-hidden h-[400px] duration-500 hover:w-full"
+        className="relative group grow transition-all w-56 rounded-lg overflow-hidden h-[400px] duration-500 hover:w-full"
       >
         <img
           src={`/images/gallery/gallery${num}.jpg`}
@@ -273,7 +313,66 @@ export default function HomePage() {
     </a>
   </div>
 </section>
+{/* {*************************************** NEWS & UPDATES *******************************} */}
+<section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Heading */}
+        <div className="text-center mb-12" data-aos="fade-up">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            News & <span className="text-green-700">Updates</span>
+          </h2>
+          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+            Stay updated with the latest activities, events, and initiatives from
+            the Federal Youth Parliament.
+          </p>
+        </div>
 
+        {/* Swiper Section */}
+        <div data-aos="fade-up" data-aos-delay="100">
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            spaceBetween={30}
+            slidesPerView={1}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="mySwiper"
+          >
+            {newsItems.map((item, index) => (
+              <SwiperSlide key={index}>
+                <a
+                  href={item.link}
+                  className="block rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2"
+                >
+                  <div className="relative">
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      width={600}
+                      height={400}
+                      className="h-80 w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-200 text-sm mb-3">{item.desc}</p>
+                      <span className="text-green-400 font-semibold hover:underline">
+                        Read More →
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </section>
 {/* ****************************************** CONTACT FORM ******************************** */}
 <section className="relative bg-gray-900 text-white overflow-hidden">
   <div className="absolute inset-0">
@@ -283,7 +382,7 @@ export default function HomePage() {
       className="w-full h-full object-cover opacity-70"
     />
   </div>
-  <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-green-900/50"></div>
+  <div className="absolute inset-0 bg-linear-to-r from-black/70 to-green-900/50"></div>
 
   <div className="relative max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
     <div data-aos="fade-right" className="space-y-6">
@@ -321,7 +420,7 @@ export default function HomePage() {
         ></textarea>
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 rounded-full shadow-lg transition"
+          className="w-full bg-linear-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 rounded-full shadow-lg transition"
         >
           Send Message
         </button>
@@ -330,8 +429,6 @@ export default function HomePage() {
   </div>
 </section>
 
-      {/* ************ You have more sections (executive, events, gallery, form) ************ */}
-      {/* Do you want me to continue converting all remaining sections too (executives, events, gallery, news, form)? */}
 
     </main>
   );
