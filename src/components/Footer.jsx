@@ -71,7 +71,7 @@ export default function Footer() {
           <ul className="space-y-3 text-gray-600 text-sm">
             <li className="flex items-center gap-2">
               <i className="fa-solid fa-location-dot text-green-600"></i>
-              Peshawar, Khyber Pakhtunkhwa, Pakistan
+                Office  no C-7, Spinzar IT tower University road peshawar  .
             </li>
             <li className="flex items-center gap-2">
               <i className="fa-solid fa-phone text-green-600"></i>
