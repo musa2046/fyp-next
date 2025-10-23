@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
+import { AdvisorCard } from "../../components/AdvisorCard";
+import advisors from "../../data/advisors";
+import { ExecutiveCard } from "../../components/ExecutiveCard";
+import {executives} from "../../data/executives";
 
 export default function ExecutiveSection() {
   useEffect(() => {
@@ -55,129 +59,91 @@ export default function ExecutiveSection() {
             Executive Members
           </h2>
 
-          {/* Member 1 */}
-          <div
-            className="grid md:grid-cols-2 gap-10 items-center mb-20"
-            data-aos="fade-up"
-          >
-            <div className="flex justify-center">
-              <Image
-                src="/images/executives/president.jpg"
-                alt="President"
-                width={300}
-                height={300}
-                className="w-72 h-72 object-cover rounded-3xl shadow-xl border-4 border-green-600"
-              />
-            </div>
-            <div>
-              <h3 className="text-3xl font-bold text-gray-800">
-                Muhammad Ibrar Khilji
-              </h3>
-              <p className="text-green-700 font-semibold mb-4">
-                President / Chairman
-              </p>
-              <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
-                “As President, I envision building a community where every voice
-                matters and innovation drives meaningful change.”
-              </blockquote>
-              <div className="flex gap-5 mt-6">
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+          {executives.map((executive) => (
+            <ExecutiveCard
+              key={executive.name}
+              name={executive.name}
+              role={executive.role}
+              image={executive.image}
+              bio={executive.bio}
+              facebook={executive.facebook}
+              instagram={executive.instagram}
+            />
+          ))}
 
-          {/* Member 2 */}
-          <div
-            className="grid md:grid-cols-2 gap-10 items-center mb-20 md:flex-row-reverse"
-            data-aos="fade-up"
-          >
-            <div className="flex justify-center md:order-2">
-              <Image
-                src="/images/executives/vice-president.jpg"
-                alt="Vice President"
-                width={300}
-                height={300}
-                className="w-72 h-72 object-cover rounded-3xl shadow-xl border-4 border-green-600"
-              />
-            </div>
-            <div className="md:order-1">
-              <h3 className="text-3xl font-bold text-gray-800">
-                Salah Uddin Khan
-              </h3>
-              <p className="text-green-700 font-semibold mb-4">Vice President</p>
-              <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
-                “My mission is to empower youth through knowledge and
-                opportunities, fostering innovation and leadership.”
-              </blockquote>
-              <div className="flex gap-5 mt-6">
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Member 3 */}
-          <div
-            className="grid md:grid-cols-2 gap-10 items-center mb-20"
-            data-aos="fade-up"
-          >
-            <div className="flex justify-center">
-              <Image
-                src="/images/executives/general-sect2.jpg"
-                alt="General Secretary"
-                width={300}
-                height={300}
-                className="w-72 h-72 object-cover rounded-3xl shadow-xl border-4 border-green-600"
-              />
-            </div>
-            <div>
-              <h3 className="text-3xl font-bold text-gray-800">Saqib Ali</h3>
-              <p className="text-green-700 font-semibold mb-4">
-                General Secretary
-              </p>
-              <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
-                “I believe in collaboration and teamwork, ensuring smooth
-                communication and effective organizational growth.”
-              </blockquote>
-              <div className="flex gap-5 mt-6">
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-500 hover:text-green-700 transition text-2xl"
-                >
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+      {/* Patron In Chief Section */}
+      <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
+  <div className="max-w-7xl mx-auto px-6">
+    {/* Heading */}
+    <h2
+      className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
+      data-aos="fade-up"
+    >
+      Patron In Chief
+    </h2>
+
+    <div
+      className="flex flex-col items-center text-center"
+      data-aos="fade-up"
+    >
+      {/* Image (Horizontal landscape style) */}
+      <div className="relative w-[480px] h-[280px] sm:w-[600px] sm:h-[350px] overflow-hidden rounded-2xl shadow-2xl border-4 border-green-600">
+        <Image
+          src="/images/executives/president.jpg" 
+          alt="Patron in Chief"
+          fill
+          className="object-cover object-center transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* Name & Designation */}
+      <h2 className="mt-8 text-3xl font-bold text-gray-800">
+        Muhammad Zahir Shah
+      </h2>
+      <p className="text-green-700 font-semibold text-lg">
+        Patron-in-Chief
+      </p>
+
+      {/* Message */}
+      <div className="max-w-2xl mt-8 text-gray-700 leading-relaxed">
+        <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
+          “It gives me immense pleasure to see the young generation stepping up
+          as changemakers, thinkers, and leaders of tomorrow. The Federal Youth
+          Parliament stands as a platform for empowerment, inclusion, and
+          innovation — a voice for the future we are building together.”
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      {/* Legal Advisors Section */}
+
+      <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2
+            className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
+            data-aos="fade-up"
+          >
+            Advisors
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
+            {advisors.map((advisor) => (
+              <AdvisorCard 
+                key={advisor.name}
+                img={advisor.img}
+                name={advisor.name}
+                role={advisor.role}
+                bio={advisor.bio}
+                delay={advisor.delay}
+              />
+            ))}
+          </div>
+        </div>
+  </section>
 
       {/* Call To Action Section */}
       <section className="w-full bg-[#FAF3DD] py-16">
