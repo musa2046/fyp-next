@@ -7,7 +7,7 @@ import { AdvisorCard } from "../../components/AdvisorCard";
 import advisors from "../../data/advisors";
 import { ExecutiveCard } from "../../components/ExecutiveCard";
 import {executives} from "../../data/executives";
-
+import JuniorExecutiveCard from "../../components/JuniorExecutiveCard";
 export default function ExecutiveSection() {
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -64,14 +64,31 @@ export default function ExecutiveSection() {
               key={executive.name}
               name={executive.name}
               role={executive.role}
+              intro={executive.intro}
               image={executive.image}
-              bio={executive.bio}
+              message={executive.message}
               facebook={executive.facebook}
               instagram={executive.instagram}
             />
           ))}
 
         </div>
+      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <JuniorExecutiveCard 
+        key={1}
+        name={"Hussain Ahmad"}
+        role={"Youth Governor Khyber Pakhtunkhwa"}
+        img={"/images/executives/junior-executive1.jpg"}
+        delay={100}
+      />
+      <JuniorExecutiveCard 
+        key={1}
+        name={"Sufyan Afridi"}
+        role={"Cheif Election Commission"}
+        img={"/images/executives/junior-executive2.jpg"}
+        delay={100}
+      />
+    </div>
       </section>
       {/* Patron In Chief Section */}
       <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
@@ -130,7 +147,7 @@ export default function ExecutiveSection() {
           >
             Advisors
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-12"> */}
             {advisors.map((advisor) => (
               <AdvisorCard 
                 key={advisor.name}
@@ -142,7 +159,7 @@ export default function ExecutiveSection() {
               />
             ))}
           </div>
-        </div>
+        {/* </div> */}
   </section>
 
       {/* Call To Action Section */}
