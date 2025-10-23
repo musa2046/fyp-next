@@ -253,9 +253,13 @@ export default function Achievements() {
   });
 
   if (isLoading)
-    return <p className="text-center py-10 text-gray-600">Loading achievements...</p>;
+    return  <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+      <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
+        Loading...
+      </h2>
+    </div>
   if (error)
-    return <p className="text-center py-10 text-red-500">Failed to load achievements.</p>;
+    return <div className="text-center py-10 justify-center items-center w-full h-screen text-red-500">Failed to load achievements.</div>;
 
   return (
     <main>

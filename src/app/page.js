@@ -305,12 +305,12 @@ export default function HomePage() {
   </div>
 
   <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="200">
-    <a
-      href="/pages/Gallery.html"
+    <Link
+      href="/gallery"
       className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
     >
       View Gallery
-    </a>
+    </Link>
   </div>
 </section>
 {/* {*************************************** NEWS & UPDATES *******************************} */}

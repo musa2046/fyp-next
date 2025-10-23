@@ -12,7 +12,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-white text-gray-800 py-12 border-t border-gray-200">
+    <footer className="bg-white text-gray-800 py-12 border-t  border-gray-200">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Quick Links */}
         <div>

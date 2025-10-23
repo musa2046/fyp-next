@@ -324,9 +324,16 @@ export default function Programs() {
 
   console.log(data)
 
-  if(isLoading){
-    return <p>Loading...</p>
-  }
+  if (isLoading) {
+  return (
+    <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+      <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
+        Loading...
+      </h2>
+    </div>
+  );
+}
+
 
   return (
 <section className="w-full py-16 bg-green-50" id="programs">

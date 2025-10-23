@@ -227,8 +227,12 @@ export default function GallerySection() {
     enabled: true,
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading gallery...</p>;
-  if (error) return <p className="text-center py-10 text-red-500">Failed to load gallery.</p>;
+  if (isLoading) return  <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+      <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
+        Loading...
+      </h2>
+    </div>
+  if (error) return <h2 className="text-center py-10 w-full h-screen justify-center items-center text-red-500">Failed to load gallery.</h2>;
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
