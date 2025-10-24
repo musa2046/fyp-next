@@ -1,16 +1,35 @@
 "use client";
 import { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import { AdvisorCard } from "../../components/AdvisorCard";
 import advisors from "../../data/advisors";
 import { ExecutiveCard } from "../../components/ExecutiveCard";
-import {executives} from "../../data/executives";
+import { executives } from "../../data/executives";
 import JuniorExecutiveCard from "../../components/JuniorExecutiveCard";
+import { useQuery } from "@tanstack/react-query";
+import { getExectives } from "../../../config/apis";
+import Aos from "aos";
+
 export default function ExecutiveSection() {
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["Execs"],
+    queryFn: getExectives,
+    enabled: true
+  })
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+        <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
+          Loading...
+        </h2>
+      </div>
+    );
+  }
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    Aos.init({ duration: 800, once: true });
   }, []);
 
   return (
@@ -59,82 +78,77 @@ export default function ExecutiveSection() {
             Executive Members
           </h2>
 
-          {executives.map((executive) => (
+          {data?.data?.main?.length>0 && data?.data?.main?.map((executive) => (
             <ExecutiveCard
-              key={executive.name}
+              key={executive._id}
               name={executive.name}
               role={executive.role}
-              intro={executive.intro}
+              intro={executive.about}
               image={executive.image}
               message={executive.message}
-              facebook={executive.facebook}
-              instagram={executive.instagram}
+              facebook={executive.socials?.fb}
+              instagram={executive.socials?.insta}
             />
           ))}
 
         </div>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <JuniorExecutiveCard 
-        key={1}
-        name={"Hussain Ahmad"}
-        role={"Youth Governor Khyber Pakhtunkhwa"}
-        img={"/images/executives/junior-executive1.jpg"}
-        delay={100}
-      />
-      <JuniorExecutiveCard 
-        key={1}
-        name={"Sufyan Afridi"}
-        role={"Cheif Election Commission"}
-        img={"/images/executives/junior-executive2.jpg"}
-        delay={100}
-      />
-    </div>
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            data?.data?.others?.length>0 && data?.data?.others?.map((other, index) => (
+              <JuniorExecutiveCard
+                key={index}
+                name={other?.name}
+                role={other?.role}
+                img={other?.image?.url}
+                delay={100}
+              />
+            ))
+          }
+
+        </div>
       </section>
       {/* Patron In Chief Section */}
       <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
-  <div className="max-w-7xl mx-auto px-6">
-    {/* Heading */}
-    <h2
-      className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
-      data-aos="fade-up"
-    >
-      Patron In Chief
-    </h2>
+        {data?.data?.patron?.length > 0 && <div className="max-w-7xl mx-auto px-6">
+          {/* Heading */}
+          <h2
+            className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
+            data-aos="fade-up"
+          >
+            Patron In Chief
+          </h2>
 
-    <div
-      className="flex flex-col items-center text-center"
-      data-aos="fade-up"
-    >
-      {/* Image (Horizontal landscape style) */}
-      <div className="relative w-[480px] h-[280px] sm:w-[600px] sm:h-[350px] overflow-hidden rounded-2xl shadow-2xl border-4 border-green-600">
-        <Image
-          src="/images/executives/president.jpg" 
-          alt="Patron in Chief"
-          fill
-          className="object-cover object-center transition-transform duration-500 hover:scale-105"
-        />
-      </div>
+          <div
+            className="flex flex-col items-center text-center"
+            data-aos="fade-up"
+          >
+            {/* Image (Horizontal landscape style) */}
+            <div className="relative w-[480px] h-[280px] sm:w-[600px] sm:h-[350px] overflow-hidden rounded-2xl shadow-2xl border-4 border-green-600">
+              <Image
+                src={data?.data?.patron[0]?.image?.url}
+                alt="Patron in Chief"
+                fill
+                className="object-cover object-center transition-transform duration-500 hover:scale-105"
+              />
+            </div>
 
-      {/* Name & Designation */}
-      <h2 className="mt-8 text-3xl font-bold text-gray-800">
-        Muhammad Zahir Shah
-      </h2>
-      <p className="text-green-700 font-semibold text-lg">
-        Patron-in-Chief
-      </p>
+            {/* Name & Designation */}
+            <h2 className="mt-8 text-3xl font-bold text-gray-800">
+              {data?.data?.patron[0]?.name}
+            </h2>
+            <p className="text-green-700 font-semibold text-lg">
+              {data?.data?.patron[0]?.role}
+            </p>
 
-      {/* Message */}
-      <div className="max-w-2xl mt-8 text-gray-700 leading-relaxed">
-        <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
-          “It gives me immense pleasure to see the young generation stepping up
-          as changemakers, thinkers, and leaders of tomorrow. The Federal Youth
-          Parliament stands as a platform for empowerment, inclusion, and
-          innovation — a voice for the future we are building together.”
-        </blockquote>
-      </div>
-    </div>
-  </div>
-</section>
+            {/* Message */}
+            <div className="max-w-2xl mt-8 text-gray-700 leading-relaxed">
+              <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
+                {data?.data?.patron[0]?.message}
+              </blockquote>
+            </div>
+          </div>
+        </div>}
+      </section>
 
 
       {/* Legal Advisors Section */}
@@ -148,19 +162,19 @@ export default function ExecutiveSection() {
             Advisors
           </h2>
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-12"> */}
-            {advisors.map((advisor) => (
-              <AdvisorCard 
-                key={advisor.name}
-                img={advisor.img}
-                name={advisor.name}
-                role={advisor.role}
-                bio={advisor.bio}
-                delay={advisor.delay}
-              />
-            ))}
-          </div>
+          {data?.data?.advisors?.length>0 && data?.data?.advisors?.map((advisor) => (
+            <AdvisorCard
+              key={advisor.name}
+              img={advisor.img}
+              name={advisor.name}
+              role={advisor.role}
+              bio={advisor.bio}
+              delay={advisor.delay}
+            />
+          ))}
+        </div>
         {/* </div> */}
-  </section>
+      </section>
 
       {/* Call To Action Section */}
       <section className="w-full bg-[#FAF3DD] py-16">

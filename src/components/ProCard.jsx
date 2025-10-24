@@ -40,8 +40,7 @@ export function ProCard({ program }) {
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300">
       <Image
-        src={program.image || "/images/default.jpg"}
-        
+        src={program.image?.url}
         alt={program.title}
         width={600}
         height={300}

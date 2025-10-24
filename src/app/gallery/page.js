@@ -201,11 +201,11 @@
 
 "use client";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getGallery } from "@/config/apis";
 import GalleryCard from "@/components/GalleryCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { getGallery } from "../../../config/apis";
 
 export default function GallerySection() {
   useEffect(() => {
@@ -226,6 +226,8 @@ export default function GallerySection() {
       lastPage.page < lastPage.pages ? lastPage.page + 1 : undefined,
     enabled: true,
   });
+
+  console.log(data)
 
   if (isLoading) return  <div className="flex justify-center items-center w-full h-screen bg-gray-50">
       <h2 className="text-3xl font-semibold text-green-700 animate-pulse">

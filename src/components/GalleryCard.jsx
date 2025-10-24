@@ -5,7 +5,7 @@ export default function GalleryCard({ item }) {
   return (
     <div className="relative group h-[400px] rounded-xl overflow-hidden shadow-lg transition-all duration-500">
       <Image
-        src={item.image}
+        src={item.image?.url}
         alt={item.title}
         fill
         className="object-cover object-center"

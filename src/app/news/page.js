@@ -98,8 +98,8 @@
 import React from "react";
 import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getPrograms } from "@/config/apis"; // your API function
 import { NewsCard } from "@/components/NewsCard"; // your card component
+import { getPrograms } from "../../../config/apis";
 
 export default function News() {
   const {
@@ -111,7 +111,7 @@ export default function News() {
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["news"],
-    queryFn: ({ pageParam = 1 }) => getPrograms({ page: pageParam }), // ✅ fixed: use correct function name
+    queryFn: ({ pageParam = 1 }) => getPrograms({ pageParam }), // ✅ fixed: use correct function name
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.pages ? lastPage.page + 1 : undefined,
     enabled: true,

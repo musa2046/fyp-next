@@ -289,7 +289,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////////
-{/* Dynamic Programs Section */}
+{/* Dynamic Programs Section */ }
 
 
 
@@ -302,11 +302,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { getPrograms } from "../../../config/apis";
 import { ProCard } from "@/components/ProCard";
+import { getPrograms } from "../../../config/apis";
 export default function Programs() {
 
-   const {
+  const {
     data,
     isLoading,
     error,
@@ -315,53 +315,51 @@ export default function Programs() {
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["programs"],
-    queryFn: ({ pageParam = 1 }) => getPrograms({ page: pageParam }),
+    queryFn: ({ pageParam = 1 }) => getPrograms({ pageParam }),
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.pages ? lastPage.page + 1 : undefined,
     enabled: true,
   });
 
 
-  console.log(data)
-
   if (isLoading) {
-  return (
-    <div className="flex justify-center items-center w-full h-screen bg-gray-50">
-      <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
-        Loading...
-      </h2>
-    </div>
-  );
-}
-
-
-  return (
-<section className="w-full py-16 bg-green-50" id="programs">
-  <div className="max-w-6xl mx-auto px-6">
-    <h2 className="text-3xl font-bold text-center text-green-800 mb-10">
-      Latest Programs
-    </h2>
-
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {data?.pages?.map((page, pageIndex) =>
-        page.data.map((program, index) => (
-          <ProCard key={`${pageIndex}-${program.id || index}`} program={program} />
-        ))
-      )}
-    </div>
-
-    {hasNextPage && (
-      <div className="flex justify-center mt-10">
-        <button
-          onClick={() => fetchNextPage()}
-          disabled={isFetchingNextPage}
-          className="px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition"
-        >
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </button>
+    return (
+      <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+        <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
+          Loading...
+        </h2>
       </div>
-    )}
-  </div>
-</section>
+    );
+  }
+
+
+  return (
+    <section className="w-full py-16 bg-green-50" id="programs">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center text-green-800 mb-10">
+          Latest Programs
+        </h2>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {data?.pages?.map((page, pageIndex) =>
+            page.data.map((program, index) => (
+              <ProCard key={`${pageIndex}-${program.id || index}`} program={program} />
+            ))
+          )}
+        </div>
+
+        {hasNextPage && (
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+              className="px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition"
+            >
+              {isFetchingNextPage ? "Loading..." : "Load More"}
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
