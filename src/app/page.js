@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -17,7 +17,37 @@ export default function HomePage() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
-
+  
+    const [form, setForm] = useState({  
+        name: "",
+        email: "",
+        message: ""
+      });
+    
+      const handleChange = (e) => {
+        setForm({
+          ...form,
+          [e.target.name]: e.target.value
+        });
+      }
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+    
+         const message = `
+      *New Message from FYP Website*
+    ----------------------------
+     Name: ${form.name}
+     Email: ${form.email}
+     Message: ${form.message}`;
+        const whatsappUrl = `https://wa.me/923335825437?text=${encodeURIComponent(
+          message
+        )}`;
+    
+        window.open(whatsappUrl, "_blank");
+        setForm({ name: "", email: "", message: "" });
+      }
+  
   const newsItems = [
     {
       title: "Youth Summit 2025",
@@ -235,7 +265,7 @@ export default function HomePage() {
 
     <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="400">
       <a
-        href="/pages/executive.html"
+        href="/executive"
         className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
       >
         See More
@@ -397,26 +427,30 @@ export default function HomePage() {
     </div>
 
     <div data-aos="fade-left" className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl">
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Your Name"
           className="w-full px-4 py-3 rounded-lg bg-white/80 text-gray-800 focus:ring-2 focus:ring-green-400 outline-none transition"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
         />
         <input
           type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
           placeholder="Your Email"
-          className="w-full px-4 py-3 rounded-lg bg-white/80 text-gray-800 focus:ring-2 focus:ring-green-400 outline-none transition"
-        />
-        <input
-          type="text"
-          placeholder="Subject"
           className="w-full px-4 py-3 rounded-lg bg-white/80 text-gray-800 focus:ring-2 focus:ring-green-400 outline-none transition"
         />
         <textarea
           placeholder="Type Your Message"
           rows="4"
           className="w-full px-4 py-3 rounded-lg bg-white/80 text-gray-800 focus:ring-2 focus:ring-green-400 outline-none transition"
+          name="message"
+          value={form.message}
+          onChange={handleChange}
         ></textarea>
         <button
           type="submit"

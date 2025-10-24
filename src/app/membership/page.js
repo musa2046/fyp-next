@@ -12,6 +12,62 @@ const MembershipForm = () => {
     });
   }, []);
 
+
+  const [form, setForm] = React.useState({  
+    name: "",
+    email: "",
+    phone: "",
+    cnic: "",
+    gender : "",
+    age: "",
+    dob: "",
+    province: "",
+    education: "",
+    reason: ""
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+     const message = `
+📝 *New Membership Request*
+----------------------------
+ Name: ${form.name}
+ Email: ${form.email}
+ Phone: ${form.phone}
+ CNIC: ${form.cnic}
+ Gender: ${form.gender}
+ Age: ${form.age}
+ Date of Birth: ${form.dob}
+ Province: ${form.province}
+ Education: ${form.education}
+ Reason: ${form.reason}
+
+    `;
+    const whatsappUrl = `https://wa.me/923335825437?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappUrl, "_blank");
+    setForm({
+    name: "",
+    email: "",
+    phone: "",
+    cnic: "",
+    gender : "",
+    age: "",
+    dob: "",
+    province: "",
+    education: "",
+    reason: ""  });
+  }
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100">
       <main
@@ -21,7 +77,7 @@ const MembershipForm = () => {
         <div className="p-8 md:p-12">
           {/* Heading */}
           <h1
-            className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3 text-center text-green-700"
+            className="text-3xl md:text-4xl font-extrabold  mb-3 text-center text-green-700"
             data-aos="fade-down"
           >
             Join Federal Youth Parliament
@@ -44,7 +100,7 @@ const MembershipForm = () => {
           </div>
 
           {/* Membership Form */}
-          <form id="joinForm" className="space-y-6" noValidate>
+          <form id="joinForm" className="space-y-6" onSubmit={handleSubmit} noValidate>
             {/* Personal Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <label className="flex flex-col" data-aos="fade-right">
@@ -54,6 +110,8 @@ const MembershipForm = () => {
                 <input
                   type="text"
                   name="name"
+                  value={form.name}
+                  onChange={handleChange}
                   required
                   placeholder="Your full name"
                   className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
@@ -67,6 +125,8 @@ const MembershipForm = () => {
                 <input
                   type="email"
                   name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   required
                   placeholder="you@example.com"
                   className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
@@ -82,6 +142,8 @@ const MembershipForm = () => {
                 <input
                   type="tel"
                   name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
                   required
                   placeholder="03XX-XXXXXXX"
                   className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
@@ -95,6 +157,8 @@ const MembershipForm = () => {
                 <input
                   type="text"
                   name="cnic"
+                  value={form.cnic}
+                  onChange={handleChange}
                   required
                   placeholder="12345-1234567-1"
                   pattern="^\d{5}-\d{7}-\d{1}$"
@@ -111,6 +175,8 @@ const MembershipForm = () => {
                 </span>
                 <select
                   name="gender"
+                  value={form.gender}
+                  onChange={handleChange}
                   required
                   className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
                 >
@@ -128,6 +194,8 @@ const MembershipForm = () => {
                 <input
                   type="number"
                   name="age"
+                  value={form.age}
+                  onChange={handleChange}
                   required
                   min="15"
                   max="35"
@@ -148,6 +216,8 @@ const MembershipForm = () => {
               <input
                 type="date"
                 name="dob"
+                value={form.dob}
+                onChange={handleChange}
                 required
                 className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-green-500"
               />
@@ -160,6 +230,8 @@ const MembershipForm = () => {
               </span>
               <select
                 name="province"
+                value={form.province}
+                onChange={handleChange}
                 required
                 className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
               >
@@ -180,6 +252,8 @@ const MembershipForm = () => {
               <input
                 type="text"
                 name="education"
+                value={form.education}
+                onChange={handleChange}
                 placeholder="Your education level"
                 className="mt-2 p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
               />
@@ -192,6 +266,8 @@ const MembershipForm = () => {
               </span>
               <textarea
                 name="reason"
+                value={form.reason}
+                onChange={handleChange}
                 required
                 rows="4"
                 placeholder="Write briefly why you want to join..."

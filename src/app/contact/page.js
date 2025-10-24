@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -7,6 +7,35 @@ export default function ContactForm() {
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
+
+  const [form, setForm] = useState({  
+      name: "",
+      email: "",
+      message: ""
+    });
+  
+    const handleChange = (e) => {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value
+      });
+    }
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+       const message = `
+    *New Message from FYP Website*
+  ----------------------------
+   Name: ${form.name}
+   Email: ${form.email}
+   Message: ${form.message}`;
+      const whatsappUrl = `https://wa.me/923335825437?text=${encodeURIComponent(
+        message
+      )}`;
+  
+      window.open(whatsappUrl, "_blank");
+    }
 
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100">
@@ -40,7 +69,7 @@ export default function ContactForm() {
           </div>
 
           {/* Contact Form */}
-          <form id="contactForm" className="space-y-6" noValidate>
+          <form id="contactForm" className="space-y-6" onSubmit={handleSubmit} noValidate>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Full Name */}
               <label className="flex flex-col" data-aos="fade-right">
@@ -49,6 +78,8 @@ export default function ContactForm() {
                 </span>
                 <input
                   name="name"
+                  value={form.name}
+                  onChange={handleChange}
                   id="name"
                   type="text"
                   required
@@ -64,6 +95,8 @@ export default function ContactForm() {
                 </span>
                 <input
                   name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   id="email"
                   type="email"
                   required
@@ -80,6 +113,8 @@ export default function ContactForm() {
               </span>
               <textarea
                 name="message"
+                value={form.message}
+                onChange={handleChange}
                 id="message"
                 rows="5"
                 required
