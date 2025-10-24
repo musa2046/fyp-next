@@ -52,31 +52,21 @@ import { useState } from "react";
 export function AdvisorCard(props) {
   const [expanded, setExpanded] = useState(false);
 
-  const bio = `
-  Alam Khan Adenzai is a seasoned legal professional with extensive experience in constitutional and administrative law. 
-  He has served as Assistant Advocate General, Government of Khyber Pakhtunkhwa (Swat Bench) and as Legal Advisor to several major government departments and institutions, including PDA, PESCO, TESCO, PRC, Mines & Minerals Department KP, and Abdul Wali Khan University Mardan.
-
-  He currently holds the position of Secretary General, Peshawar High Court Bar Association (2024–25), and previously served as Secretary Finance (2016–17).
-
-  Mr. Adenzai has represented several prominent political leaders, including Former Prime Minister Imran Khan, Former Chief Minister KP Ali Amin Khan Gandapur, and Current Chief Minister KP Sohail Khan Afridi. 
-  As the Legal Advisor to the Federal Youth Parliament Pakistan, he provides invaluable legal guidance and supports the organization’s mission of youth empowerment and institutional growth.
-  `;
-
-  const words = bio.split(" ");
+  const words = props.bio.split(" ");
   const shortBio = words.slice(0, 80).join(" ");
   const isLong = words.length > 80;
 
   return (
     <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
-
+      
         {/* Content Grid */}
         <div className="grid md:grid-cols-2 gap-10 items-center" data-aos="fade-up">
           {/* Left: Image */}
           <div className="flex justify-center md:justify-end">
             <div className="relative w-[380px] h-[420px] rounded-3xl overflow-hidden shadow-2xl border-4 border-green-700">
               <Image
-                src={props.img}
+                src={props.image}
                 alt={props.name}
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -95,7 +85,7 @@ export function AdvisorCard(props) {
 
 
             <p className="text-base mt-4">
-              {expanded ? bio : shortBio + (isLong ? "..." : "")}
+              {expanded ? props.bio : shortBio + (isLong ? "..." : "")}
             </p>
 
             {isLong && (
