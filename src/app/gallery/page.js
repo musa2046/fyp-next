@@ -227,7 +227,6 @@ export default function GallerySection() {
     enabled: true,
   });
 
-  console.log(data)
 
   if (isLoading) return  <div className="flex justify-center items-center w-full h-screen bg-gray-50">
       <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
