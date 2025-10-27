@@ -66,3 +66,11 @@ export const getExectives = async ()=>{
     }
 }
 
+export const getNews = async ({ pageParam = 1 })=>{
+    try {
+        const response = await axios.get(`${base_url}/updates/client/updates?page=${pageParam}`, {withCredentials: true})
+        return response.data;
+    } catch (error) {
+        throw new Error(error);
+    }
+}

@@ -31,7 +31,16 @@ export default function HomePage() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
-
+  
+      const [expandedCards, setExpandedCards] = useState({});
+  
+    const toggleExpand = (index) => {
+      setExpandedCards((prev) => ({
+        ...prev,
+        [index]: !prev[index],
+      }));
+    };
+ const isTextLong = (text) => text && text.split(" ").length > 40;
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -126,39 +135,88 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* ******************** PROGRAM CARDS *********************** */}
       <section className="w-full py-20 bg-green-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              Our <span className="text-green-700">Programs</span>
-            </h2>
-            <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-              Federal Youth Parliament runs diverse initiatives to empower youth,
-              build leadership, and create meaningful impact in communities.
-            </p>
-          </div>
-
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {data?.programs?.map((card, i) => (
-              <div key={i} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:scale-[1.02]" data-aos="fade-up" data-aos-delay={(i + 1) * 100}>
-                <Image src={card.image?.url} alt={card.title} width={400} height={300} className="w-full h-56 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-green-800">{card.title}</h3>
-                  <p className="mt-3 text-gray-600 leading-relaxed">{card.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="400">
-            <Link href="/programs" className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition">
-              See More
-            </Link>
-          </div>
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section Heading */}
+        <div className="text-center mb-12" data-aos="fade-up">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            Our <span className="text-green-700">Programs</span>
+          </h2>
+          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+            Federal Youth Parliament runs diverse initiatives to empower youth,
+            build leadership, and create meaningful impact in communities.
+          </p>
         </div>
-      </section>
+
+        {/* Cards Grid */}
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center content-start">
+          {data?.programs?.map((card, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden 
+                         hover:shadow-2xl transform transition duration-500
+                         hover:-translate-y-2 hover:scale-[1.02]
+                         w-full max-w-[360px] flex flex-col self-start"
+              data-aos="fade-up"
+              data-aos-delay={(i + 1) * 100}
+            >
+              {/* Image */}
+              <Image
+                src={card.image?.url}
+                alt={card.title}
+                width={400}
+                height={300}
+                className="w-full h-56 object-cover"
+              />
+
+              {/* Content */}
+              <div className="p-6 flex flex-col grow justify-between">
+                <h3 className="text-xl font-semibold text-green-800">
+                  {card.title}
+                </h3>
+
+                <p
+                  className={`mt-3 text-gray-600 leading-relaxed text-sm transition-all duration-300 ${
+                    expandedCards[i] ? "" : "line-clamp-4"
+                  }`}
+                >
+                  {card.description}
+                </p>
+
+                {isTextLong(card.description) ? (
+                  <button
+                    onClick={() => toggleExpand(i)}
+                    className=" text-green-700 font-semibold hover:text-green-900 transition self-start"
+                  >
+                    {expandedCards[i] ? "Read Less" : "Read More"}
+                  </button>
+                ): <button
+                    onClick={() => toggleExpand(i)}
+                    className="mt-5 text-green-700 font-semibold hover:text-green-900 transition self-start"
+                  >
+                    &nbsp;
+                  </button>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* See More Button */}
+        <div
+          className="mt-12 flex justify-center"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          <Link
+            href="/programs"
+            className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
+          >
+            See More
+          </Link>
+        </div>
+      </div>
+    </section>
       {/* ************************************************ EXECUTIVE MEMBERS ********************************* */}
       <section className="w-full py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
@@ -171,45 +229,70 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {data?.members?.map((member) => (
-              <div
-                key={member.name}
-                className="max-w-sm mx-auto shadow-xl rounded-2xl overflow-hidden relative transform transition duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl"
-                data-aos="fade-up"
-                data-aos-delay={member.delay}
-              >
-                <div className="absolute inset-0">
-                  <img
-                    src={member.image?.url}
-                    alt={member.role}
-                    className="w-full h-full object-cover opacity-50"
-                  />
-                  <div className="absolute inset-0 bg-green-50 bg-opacity-70"></div>
-                </div>
-                <div className="relative flex flex-col items-center p-6">
-                  <img
-                    src={member.image?.url}
-                    alt={member.role}
-                    className="w-36 h-36 rounded-full border-4 border-green-600 shadow-lg object-cover mb-4"
-                  />
-                  <h3 className="text-xl font-bold text-gray-800">{member.name}</h3>
-                  <p className="text-green-700 font-semibold mb-3">{(member.role === "Chairman" || member.role === "Vice President" || member.role === "General Secretary") ? `Co-Founder/${member.role}` : member.role }</p>
-                  <p className="text-gray-700 text-center text-sm leading-relaxed">
-                    {member.about}
-                  </p>
-                </div>
-                <div className="relative flex justify-center gap-6 py-4 bg-white/70 backdrop-blur-md border-t">
-                  <a href="#" className="text-gray-500 hover:text-green-700 transition text-xl">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="#" className="text-gray-500 hover:text-green-700 transition text-xl">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+  {data?.members?.map((member) => (
+    <div
+      key={member.name}
+      className="
+        w-full max-w-[340px] h-[480px] 
+        mx-auto bg-white shadow-xl rounded-2xl overflow-hidden relative 
+        flex flex-col justify-between
+        transform transition duration-500 
+        hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl
+      "
+      data-aos="fade-up"
+      data-aos-delay={member.delay}
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={member.image?.url}
+          alt={member.role}
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px]"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative flex flex-col items-center text-center p-6 grow">
+        <img
+          src={member.image?.url}
+          alt={member.role}
+          className="w-32 h-32 rounded-full border-4 border-green-600 shadow-lg object-cover mb-4"
+        />
+        <h3 className="text-xl font-bold text-gray-800 wrap-break-word">
+          {member.name}
+        </h3>
+        <p className="text-green-700 font-semibold mb-3">
+          {(member.role === "Chairman" ||
+            member.role === "Vice President" ||
+            member.role === "General Secretary")
+            ? `Co-Founder / ${member.role}`
+            : member.role}
+        </p>
+        <p className="text-gray-700 text-center text-sm leading-relaxed line-clamp-4 wrap-break-word">
+          {member.about}
+        </p>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="relative flex justify-center gap-6 py-4 bg-white/70 backdrop-blur-md border-t">
+        <a
+          href="#"
+          className="text-gray-500 hover:text-green-700 transition text-xl"
+        >
+          <i className="fab fa-facebook-f"></i>
+        </a>
+        <a
+          href="#"
+          className="text-gray-500 hover:text-green-700 transition text-xl"
+        >
+          <i className="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
 
           <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="400">
             <a
@@ -243,7 +326,7 @@ export default function HomePage() {
                   <span className="text-gray-500 text-sm">{event.location}</span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-2">{event.title}</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-sm break-all">
                   {event.description}
                 </p>
               </div>

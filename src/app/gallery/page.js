@@ -201,6 +201,7 @@
 
 "use client";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import GalleryCard from "@/components/GalleryCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -228,14 +229,100 @@ export default function GallerySection() {
   });
 
 
-  if (isLoading) return  <div className="flex justify-center items-center w-full h-screen bg-gray-50">
+  if (isLoading) {
+    return (
+      <>
+        {/* Hero Section */}
+        <section className="relative h-[60vh] flex items-center justify-center text-center overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+            src="/images/home/bg2.jpg"
+            alt="Gallery Background"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 px-6" data-aos="fade-up">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white">
+            Our <span className="text-green-500">Gallery</span>
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+            Explore snapshots of our{" "}
+            <span className="text-green-400 font-semibold">journey</span>,
+            highlighting{" "}
+            <span className="text-green-400 font-semibold">
+              youth-led programs
+            </span>
+            ,{" "}
+            <span className="text-green-400 font-semibold">events</span>, and{" "}
+            <span className="text-green-400 font-semibold">achievements</span>.
+          </p>
+        </div>
+      </section>
+
+    <section className="max-w-7xl mx-auto px-6 py-16">
+      <h2
+        className="text-3xl md:text-4xl font-extrabold text-center mb-4"
+        data-aos="fade-up"
+      >
+        <span className="text-gray-900">Photo</span>{" "}
+        <span className="text-green-600">Gallery</span>
+      </h2>
+
+      <p
+        className="text-center text-gray-600 max-w-2xl mx-auto mb-10"
+        data-aos="fade-up"
+      >
+        Relive the inspiring moments from Federal Youth Parliament’s programs and events.
+      </p>
+    
+    </section>
       <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
         Loading...
       </h2>
-    </div>
+      </>
+      )
+      ;}
   if (error) return <h2 className="text-center py-10 w-full h-screen justify-center items-center text-red-500">Failed to load gallery.</h2>;
 
   return (
+    <>
+      {/* Hero Section */}
+      <section className="relative h-[60vh] flex items-center justify-center text-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/home/bg2.jpg"
+            alt="Gallery Background"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 px-6" data-aos="fade-up">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white">
+            Our <span className="text-green-500">Gallery</span>
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+            Explore snapshots of our{" "}
+            <span className="text-green-400 font-semibold">journey</span>,
+            highlighting{" "}
+            <span className="text-green-400 font-semibold">
+              youth-led programs
+            </span>
+            ,{" "}
+            <span className="text-green-400 font-semibold">events</span>, and{" "}
+            <span className="text-green-400 font-semibold">achievements</span>.
+          </p>
+        </div>
+      </section>
+
     <section className="max-w-7xl mx-auto px-6 py-16">
       <h2
         className="text-3xl md:text-4xl font-extrabold text-center mb-4"
@@ -273,5 +360,6 @@ export default function GallerySection() {
         </div>
       )}
     </section>
+    </>
   );
 }

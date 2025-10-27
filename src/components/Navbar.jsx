@@ -79,7 +79,6 @@ export default function Navbar() {
               </button>
               <div className="absolute hidden group-hover:block bg-white shadow-lg rounded py-2 w-48">
                 <Link href="/about" className="block px-4 py-2 hover:text-green-700 hover:scale-110 hover:font-bold transition transform duration-200">Mission</Link>
-                <Link href="/constitution" className="block px-4 py-2 hover:text-green-700 hover:scale-110 hover:font-bold transition transform duration-200">Constitution</Link>
                 <Link href="/executive" className="block px-4 py-2 hover:text-green-700 hover:scale-110 hover:font-bold transition transform duration-200">Executive Members</Link>
               </div>
             </div>

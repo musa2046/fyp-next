@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -11,6 +11,16 @@ const Achievements = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+
+  // ✅ Local state for read more toggles
+  const [expandedAchieve, setExpandedAchieve] = useState({});
+  const [expandedAward, setExpandedAward] = useState({});
+
+  const toggleAchieve = (i) =>
+    setExpandedAchieve((prev) => ({ ...prev, [i]: !prev[i] }));
+
+  const toggleAward = (i) =>
+    setExpandedAward((prev) => ({ ...prev, [i]: !prev[i] }));
 
   // 🔹 Achievements Query
   const {
@@ -43,7 +53,7 @@ const Achievements = () => {
   });
 
   return (
-    <main>
+    <main className="overflow-hidden">
       {/* Hero Section */}
       <section className="relative w-full h-[80vh] flex items-center justify-center">
         <div className="absolute inset-0">
@@ -86,12 +96,12 @@ const Achievements = () => {
         </p>
 
         {/* Achievement Cards */}
-        <div className="grid md:grid-cols-3 gap-8" data-aos="zoom-in">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center" data-aos="zoom-in">
           {achieveData?.pages?.map((page) =>
             page.data?.map((card, i) => (
               <div
-                key={i}
-                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:-translate-y-2"
+                key={card._id || i}
+                className="bg-white w-full max-w-[340px] rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:-translate-y-2 flex flex-col"
               >
                 <Image
                   src={card.image?.url}
@@ -100,13 +110,27 @@ const Achievements = () => {
                   height={300}
                   className="h-48 w-full object-cover"
                 />
-                <div className="p-5">
-                  <h3 className="text-xl font-bold text-green-700 mb-2">
-                    {card.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {card.description}
-                  </p>
+                <div className="p-5 flex flex-col grow justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-green-700 mb-2">
+                      {card.title}
+                    </h3>
+                    <p
+                      className={`text-gray-600 text-sm leading-relaxed ${
+                        expandedAchieve[i] ? "" : "line-clamp-4"
+                      }`}
+                    >
+                      {card.description}
+                    </p>
+                  </div>
+                  {card.description?.length > 160 && (
+                    <button
+                      onClick={() => toggleAchieve(i)}
+                      className="mt-3 text-green-600 font-semibold hover:text-green-800 transition"
+                    >
+                      {expandedAchieve[i] ? "Read Less" : "Read More"}
+                    </button>
+                  )}
                 </div>
               </div>
             ))
@@ -153,14 +177,14 @@ const Achievements = () => {
 
           {/* Awards Grid */}
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+            className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center"
             data-aos="fade-up"
           >
             {awardData?.pages?.map((page) =>
               page.data?.map((award, i) => (
                 <div
-                  key={i}
-                  className="bg-white/90 rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:-translate-y-2"
+                  key={award._id || i}
+                  className="bg-white/90 w-full max-w-[280px] rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:-translate-y-2 flex flex-col"
                 >
                   <Image
                     src={award.image?.url}
@@ -169,11 +193,27 @@ const Achievements = () => {
                     height={300}
                     className="h-40 w-full object-cover"
                   />
-                  <div className="p-4 text-gray-800">
-                    <h3 className="text-lg font-semibold text-green-700">
-                      {award.title}
-                    </h3>
-                    <p className="text-sm mt-2">{award.description}</p>
+                  <div className="p-4 text-gray-800 flex flex-col grow justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-green-700">
+                        {award.title}
+                      </h3>
+                      <p
+                        className={`text-sm mt-2 break-all ${
+                          expandedAward[i] ? "" : "line-clamp-3"
+                        }`}
+                      >
+                        {award.description}
+                      </p>
+                    </div>
+                    {award.description?.length > 100 && (
+                      <button
+                        onClick={() => toggleAward(i)}
+                        className="mt-3 text-green-600 font-semibold hover:text-green-800 transition"
+                      >
+                        {expandedAward[i] ? "Read Less" : "Read More"}
+                      </button>
+                    )}
                   </div>
                 </div>
               ))
