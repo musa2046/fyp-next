@@ -230,9 +230,9 @@ export default function HomePage() {
           </div>
 
          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-  {data?.members?.map((member) => (
+  {data?.members?.map((member, i) => (
     <div
-      key={member.name}
+      key={i}
       className="
         w-full max-w-[340px] h-[480px] 
         mx-auto bg-white shadow-xl rounded-2xl overflow-hidden relative 
