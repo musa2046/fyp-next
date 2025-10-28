@@ -155,7 +155,7 @@ export default function Programs() {
 
       {/* Programs Section */}
       <section className="w-full py-16 bg-green-50">
-  <div className="max-w-6xl mx-auto px-6 space-y-16">
+  <div className="max-w-6xl mx-auto px-6 space-y-16" id="programs">
     {data?.pages?.[0]?.data?.map((card, i) => (
       <div
         key={card._id || i}

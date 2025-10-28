@@ -30,8 +30,9 @@ export const ExecutiveCard = (props) => {
       <div>
         <h3 className="text-3xl font-bold text-gray-800">{props.name}</h3>
         <p className="text-green-700 font-semibold mb-4">{props.role}</p>
-        <p className="text-gray-700 font-semibold mb-4">{props.about}</p>
-
+        <p className="text-gray-700 font-semibold mb-4">{props.intro}</p>
+        {console.log(props.intro)}
+        {console.log(props.message)}
         {/* Message Section */}
         <blockquote className="text-xl italic text-gray-700 leading-relaxed border-l-4 border-green-600 pl-4">
           {expanded ? props.message : shortMessage + (isLong ? "..." : "")}
