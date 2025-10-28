@@ -307,33 +307,44 @@ export default function HomePage() {
 
       {/* ****************************************** UPCOMING EVENTS ******************************** */}
       <section className="w-full py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-700 mb-10" data-aos="fade-up">
-            Upcoming <span className="text-gray-800">Events</span>
-          </h2>
+  <div className="max-w-6xl mx-auto px-6">
+    <h2
+      className="text-3xl md:text-4xl font-extrabold text-center text-green-700 mb-10"
+      data-aos="fade-up"
+    >
+      Upcoming <span className="text-gray-800">Events</span>
+    </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {data?.events?.map((event, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6"
-                data-aos="fade-up"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="bg-green-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
-                    {event.eventDate}
-                  </span>
-                  <span className="text-gray-500 text-sm">{event.location}</span>
-                </div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{event.title}</h3>
-                <p className="text-gray-600 text-sm break-all">
-                  {event.description}
-                </p>
-              </div>
-            ))}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {data?.events?.map((event, i) => (
+        <div
+          key={i}
+          className="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6"
+          data-aos="fade-up"
+        >
+          {/* Event Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+            <span className="bg-green-600 text-white text-sm font-semibold px-2 py-1 rounded-full w-fit">
+              {event.eventDate}
+            </span>
+            <span className="text-gray-500 text-sm text-right sm:text-left wrap-break-word max-w-[200px]">
+              📍 {event.location}
+            </span>
           </div>
+
+          {/* Event Content */}
+          <h3 className="text-lg font-bold text-gray-800 mb-2">
+            {event.title}
+          </h3>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            {event.description}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* ****************************************** GALLERY ******************************** */}
       <section className="py-20 bg-white">
