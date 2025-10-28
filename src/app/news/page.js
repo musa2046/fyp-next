@@ -155,7 +155,7 @@ export default function News() {
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-500"></div>
               <div className="absolute bottom-0 p-8 text-white">
-                <span className="text-sm opacity-80">September 15, 2025</span>
+                <span className="text-sm opacity-80">{card?.createdAt}</span>
                 <h2 className="text-4xl font-bold mt-2">
                   {card?.title}
                 </h2>
