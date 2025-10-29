@@ -7,6 +7,7 @@ import React from "react";
 import { getPrograms } from "../../../config/apis";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { PreFooter } from "@/components/PreFooter";
 // import { ProgramCard } from "../../../components/programCard";
 export default function Programs() {
    useEffect(() => {
@@ -191,6 +192,7 @@ export default function Programs() {
     ))}
   </div>
 </section>
+<PreFooter btnText="View Gallery" link="/gallery" />
 
     </main>
   );

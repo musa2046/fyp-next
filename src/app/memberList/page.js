@@ -2,6 +2,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { getMembers } from "../../../config/apis";
+import { PreFooter } from "@/components/PreFooter";
 
 const MembersPage = () => {
   const {
@@ -110,6 +111,7 @@ const MembersPage = () => {
           </div>
         )}
       </section>
+      <PreFooter btnText="View Executive Members" link="/executive" />
     </main>
   );
 };

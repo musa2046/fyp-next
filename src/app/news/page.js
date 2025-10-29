@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getNews } from "../../../config/apis";
+import { PreFooter } from "@/components/PreFooter";
 
 export default function News() {
 
@@ -167,6 +168,7 @@ export default function News() {
           ))}
 
         </section>
+        <PreFooter btnText="About Us " link="/about" />
       </main>
     </>
   );

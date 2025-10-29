@@ -30,11 +30,47 @@ function ExecutiveSection() {
 
   if (isLoading) {
     return (
+      <>
+       {/* Hero Section */}
+      <section className="relative w-full bg-gray-900 text-white py-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/home/bg.jpg"
+            alt="Programs"
+            fill
+            className="object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <div
+          className="relative max-w-5xl mx-auto px-6 text-center"
+          data-aos="zoom-in"
+        >
+          <p className="text-green-400 font-semibold tracking-wide uppercase mb-4">
+            Federal Youth Parliament
+          </p>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            Meet Our Leaders
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+            The Executive Members of Federal Youth Parliament are visionary
+            changemakers, dedicated to{" "}
+            <span className="text-green-400 font-semibold">
+              youth empowerment
+            </span>{" "}
+            and{" "}
+            <span className="text-green-400 font-semibold">leadership</span>,
+            building a brighter future for Pakistan.
+          </p>
+        </div>
+      </section>
       <div className="flex justify-center items-center w-full h-screen bg-gray-50">
         <h2 className="text-3xl font-semibold text-green-700 animate-pulse">
           Loading...
         </h2>
       </div>
+      </>
     );
   }
 
@@ -85,30 +121,45 @@ function ExecutiveSection() {
         </div>
       </section>
 
-      {/* Executive Members */}
-      <section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2
-            className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
-            data-aos="fade-up"
-          >
-            Executive Members
-          </h2>
+     {/* Executive Members */}
+<section className="w-full py-20 bg-linear-to-b from-green-50 to-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2
+      className="text-center font-extrabold text-4xl md:text-5xl text-green-800 mb-16"
+      data-aos="fade-up"
+    >
+      Executive Members
+    </h2>
 
-          {mainExecs.map((executive) => (
-            <ExecutiveCard
-              key={executive?._id}
-              name={executive?.name ?? "Unknown"}
-              role={executive?.role ?? ""}
-              intro={executive?.about ?? ""}
-              image={executive?.image ?? {}}
-              message={executive?.message ?? ""}
-              facebook={executive?.socials?.fb ?? ""}
-              instagram={executive?.socials?.insta ?? ""}
-            />
-          ))}
-        </div>
+    {mainExecs
+      ?.slice() // make a copy to avoid mutating original array
+      .sort((a, b) => {
+        const priority = {
+          "General Secretary": 0,
+          "Chairman": 1,
+          "Vice President": 2,
+        };
 
+        const aPriority = priority[a.role] ?? 99;
+        const bPriority = priority[b.role] ?? 99;
+
+        return aPriority - bPriority;
+      })
+      .map((executive) => (
+        <ExecutiveCard
+          key={executive?._id}
+          name={executive?.name ?? "Unknown"}
+          role={executive?.role ?? ""}
+          intro={executive?.about ?? ""}
+          image={executive?.image ?? {}}
+          message={executive?.message ?? ""}
+          facebook={executive?.socials?.fb ?? ""}
+          instagram={executive?.socials?.insta ?? ""}
+        />
+      ))}
+  </div>
+
+      {/* Junior Executives */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {otherExecs.map((other, index) => (
             <JuniorExecutiveCard
@@ -185,7 +236,8 @@ function ExecutiveSection() {
           </p>
           <div className="flex justify-center gap-6">
             <a
-              href="/membership"
+              href="https://forms.gle/fKs6zZpsw5zzgRUu6"
+              target="blank"
               className="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-full font-semibold shadow-md transition"
             >
               Join Us

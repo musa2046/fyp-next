@@ -207,6 +207,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { getGallery } from "../../../config/apis";
+import { PreFooter } from "@/components/PreFooter";
 
 export default function GallerySection() {
   useEffect(() => {
@@ -360,6 +361,8 @@ export default function GallerySection() {
         </div>
       )}
     </section>
+
+    <PreFooter btnText="View Achievements" link="/achievements" />
     </>
   );
 }

@@ -74,40 +74,39 @@ export default function HomePage() {
   
   return (
     <main>
+{/* ******************** HERO *********************** */}
+<section className="relative min-h-[90vh] flex items-center justify-center text-center text-white overflow-hidden">
+  {/* Background Slideshow */}
+  <div id="slideshow" className="absolute inset-0">
+    <Image src="/images/home/bg.jpg" fill alt="bg" className="object-cover opacity-100 transition-opacity duration-1000" />
+    <Image src="/images/home/bg2.jpg" fill alt="bg2" className="object-cover opacity-0 transition-opacity duration-1000" />
+    <Image src="/images/home/bg3.jpg" fill alt="bg3" className="object-cover opacity-0 transition-opacity duration-1000" />
+  </div>
 
-      {/* ******************** HERO *********************** */}
-      <section className="relative h-screen flex items-center justify-center text-center text-white overflow-x-hidden">
-        {/* Background Slideshow */}
-        <div id="slideshow" className="absolute inset-0">
-          <Image src="/images/home/bg.jpg" fill alt="bg" className="object-cover opacity-100 transition-opacity duration-1000" />
-          <Image src="/images/home/bg2.jpg" fill alt="bg2" className="object-cover opacity-0 transition-opacity duration-1000" />
-          <Image src="/images/home/bg3.jpg" fill alt="bg3" className="object-cover opacity-0 transition-opacity duration-1000" />
-        </div>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/70"></div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col items-center text-center" data-aos="fade-up">
-          <span className="inline-block bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium tracking-wide mb-4 animate-pulse">
-            Empowering Youth • Shaping Future
-          </span>
-          <h1 className="font-extrabold text-4xl md:text-6xl leading-tight mb-4 drop-shadow-lg">
-            Federal Youth <span className="text-green-500">Parliament</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
-            A united platform where young leaders raise their voices, create impact, and lead Pakistan toward a brighter tomorrow.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/membership" className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-6 py-3 shadow-lg transition transform hover:scale-105">
-              Join FYP Now
-            </Link>
-            <Link href="/about" className="bg-white/90 hover:bg-white text-green-700 font-semibold rounded-full px-6 py-3 shadow-lg transition transform hover:scale-105">
-              Learn More
-            </Link>
-          </div>
-        </div>
-      </section>
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center" data-aos="fade-up">
+    <span className="inline-block bg-green-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium tracking-wide mb-3 sm:mb-4 animate-pulse">
+      Empowering Youth • Shaping Future
+    </span>
+    <h1 className="font-extrabold text-3xl sm:text-4xl md:text-6xl leading-tight mb-3 sm:mb-4 drop-shadow-lg">
+      Federal Youth <span className="text-green-500">Parliament</span>
+    </h1>
+    <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-2xl">
+      A united platform where young leaders raise their voices, create impact, and lead Pakistan toward a brighter tomorrow.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+      <Link href="https://forms.gle/fKs6zZpsw5zzgRUu6" target="blank" className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-6 py-3 shadow-lg transition transform hover:scale-105 text-center">
+        Join FYP Now
+      </Link>
+      <Link href="/about" className="bg-white/90 hover:bg-white text-green-700 font-semibold rounded-full px-6 py-3 shadow-lg transition transform hover:scale-105 text-center">
+        Learn More
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* ******************** ABOUT *********************** */}
       <section className="w-full py-20 bg-linear-to-r from-green-50 via-[#FAF3DD] to-green-50">
@@ -217,93 +216,75 @@ export default function HomePage() {
         </div>
       </div>
     </section>
-      {/* ************************************************ EXECUTIVE MEMBERS ********************************* */}
-      <section className="w-full py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-              Our <span className="text-green-700">Executive Members</span>
-            </h2>
-            <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-              Meet the leadership team driving Federal Youth Parliament forward with vision, dedication, and passion for youth empowerment.
+     {/* ************************************************ EXECUTIVE MEMBERS ********************************* */}
+<section className="w-full py-16 sm:py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-10 sm:mb-12" data-aos="fade-up">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900">
+        Our <span className="text-green-700">Executive Members</span>
+      </h2>
+      <p className="mt-3 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+        Meet the leadership team driving Federal Youth Parliament forward with vision, dedication, and passion for youth empowerment.
+      </p>
+    </div>
+
+    <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+      {data?.members?.map((member, i) => (
+        <div
+          key={i}
+          className="w-full max-w-[320px] sm:max-w-[340px] bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl"
+          data-aos="fade-up"
+          data-aos-delay={member.delay}
+        >
+          {/* Background */}
+          <div className="absolute inset-0">
+            <img src={member.image?.url} alt={member.role} className="w-full h-full object-cover opacity-30" />
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative flex flex-col items-center text-center p-6">
+            <img
+              src={member.image?.url}
+              alt={member.role}
+              className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-green-600 shadow-lg object-cover mb-4"
+            />
+            <h3 className="text-lg sm:text-xl font-bold text-gray-800">{member.name}</h3>
+            <p className="text-green-700 font-semibold mb-2 text-sm sm:text-base">
+              {(member.role === "Chairman" ||
+                member.role === "Vice President" ||
+                member.role === "General Secretary")
+                ? `Co-Founder / ${member.role}`
+                : member.role}
+            </p>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed line-clamp-4">
+              {member.about}
             </p>
           </div>
 
-         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-  {data?.members?.map((member, i) => (
-    <div
-      key={i}
-      className="
-        w-full max-w-[340px] h-[480px] 
-        mx-auto bg-white shadow-xl rounded-2xl overflow-hidden relative 
-        flex flex-col justify-between
-        transform transition duration-500 
-        hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl
-      "
-      data-aos="fade-up"
-      data-aos-delay={member.delay}
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={member.image?.url}
-          alt={member.role}
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px]"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative flex flex-col items-center text-center p-6 grow">
-        <img
-          src={member.image?.url}
-          alt={member.role}
-          className="w-32 h-32 rounded-full border-4 border-green-600 shadow-lg object-cover mb-4"
-        />
-        <h3 className="text-xl font-bold text-gray-800 wrap-break-word">
-          {member.name}
-        </h3>
-        <p className="text-green-700 font-semibold mb-3">
-          {(member.role === "Chairman" ||
-            member.role === "Vice President" ||
-            member.role === "General Secretary")
-            ? `Co-Founder / ${member.role}`
-            : member.role}
-        </p>
-        <p className="text-gray-700 text-center text-sm leading-relaxed line-clamp-4 wrap-break-word">
-          {member.about}
-        </p>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="relative flex justify-center gap-6 py-4 bg-white/70 backdrop-blur-md border-t">
-        <a
-          href="#"
-          className="text-gray-500 hover:text-green-700 transition text-xl"
-        >
-          <i className="fab fa-facebook-f"></i>
-        </a>
-        <a
-          href="#"
-          className="text-gray-500 hover:text-green-700 transition text-xl"
-        >
-          <i className="fab fa-instagram"></i>
-        </a>
-      </div>
-    </div>
-  ))}
-</div>
-
-          <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="400">
-            <a
-              href="/executive"
-              className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
-            >
-              See More
+          {/* Bottom Bar */}
+          <div className="relative flex justify-center gap-6 py-4 bg-white/70 backdrop-blur-md border-t">
+            <a href="#" className="text-gray-500 hover:text-green-700 transition text-lg sm:text-xl">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" className="text-gray-500 hover:text-green-700 transition text-lg sm:text-xl">
+              <i className="fab fa-instagram"></i>
             </a>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+
+    <div className="mt-10 sm:mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="400">
+      <a
+        href="/executive"
+        className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
+      >
+        See More
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* ****************************************** UPCOMING EVENTS ******************************** */}
       <section className="w-full py-16 bg-gray-50">
@@ -345,42 +326,60 @@ export default function HomePage() {
   </div>
 </section>
 
+{/* ****************************************** GALLERY ******************************** */}
+<section className="py-20 bg-white">
+  <div className="text-center mb-12" data-aos="fade-up">
+    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+      <span className="text-green-700">FYP</span> Gallery
+    </h2>
+    <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+      Explore memorable moments and highlights captured from our journey at the Federal Youth Parliament.
+    </p>
+  </div>
 
-      {/* ****************************************** GALLERY ******************************** */}
-      <section className="py-20 bg-white">
-        <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            <span className="text-green-700">FYP</span> Gallery
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore memorable moments and highlights captured from our journey at the Federal Youth Parliament.
-          </p>
-        </div>
+  {/* Responsive Gallery */}
+  <div
+    className="
+      flex flex-wrap justify-center gap-3
+      w-full max-w-6xl mx-auto mt-10
+      px-3 sm:px-6
+    "
+  >
+    {data?.galleryImages?.slice(0, 6).map((img) => (
+      <div
+        key={img?._id}
+        className="
+          relative group overflow-hidden rounded-xl
+          w-[48%] sm:w-[30%] md:w-[23%] lg:w-[18%]
+          h-[180px] sm:h-[220px] md:h-[260px] lg:h-[320px]
+          transition-all duration-500 hover:scale-105 hover:z-10
+        "
+        data-aos="zoom-in"
+      >
+        <img
+          src={img.image?.url}
+          alt={img.title}
+          className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </div>
+    ))}
+  </div>
 
-        <div className="flex items-center gap-2 h-[400px] w-full max-w-4xl mt-10 mx-auto">
-          {data?.galleryImages?.map((img) => (
-            <div
-              key={img?._id}
-              className="relative group grow transition-all w-56 rounded-lg overflow-hidden h-[400px] duration-500 hover:w-full"
-            >
-              <img
-                src={img.image?.url}
-                alt={img.title}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          ))}
-        </div>
+  <div
+    className="mt-12 flex justify-center"
+    data-aos="fade-up"
+    data-aos-delay="200"
+  >
+    <Link
+      href="/gallery"
+      className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
+    >
+      View Gallery
+    </Link>
+  </div>
+</section>
 
-        <div className="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="200">
-          <Link
-            href="/gallery"
-            className="bg-green-700 text-white font-bold rounded-full px-8 py-3 hover:bg-green-800 transition"
-          >
-            View Gallery
-          </Link>
-        </div>
-      </section>
       {/* {*************************************** NEWS & UPDATES *******************************} */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">

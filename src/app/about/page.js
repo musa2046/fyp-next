@@ -43,10 +43,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About FYP */}
+{/* About FYP */}
 <section className="w-full py-20 bg-[#FAF3DD]">
   <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start gap-12">
-    
     {/* Content */}
     <div className="flex-1" data-aos="fade-right">
       <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left text-gray-800 mb-4">
@@ -69,6 +68,16 @@ export default function Home() {
         generation of ethical, compassionate, and visionary leaders dedicated to
         the progress of Pakistan.
       </p>
+
+      {/* Button */}
+      <div className="flex justify-center md:justify-start mt-8">
+        <Link
+          href="/constitution"
+          className="bg-green-700 text-white font-semibold px-6 py-3 rounded-full hover:bg-green-800 transition shadow-md"
+        >
+          Download Profile
+        </Link>
+      </div>
     </div>
 
     {/* Image */}
@@ -84,6 +93,7 @@ export default function Home() {
     </div>
   </div>
 </section>
+
 
 
       {/* Mission & Vision */}
@@ -149,14 +159,6 @@ export default function Home() {
                 collectively for a brighter and more inclusive future.
               </p>
             </div>
-
-            {/* CTA */}
-            <Link
-              href="/constitution"
-              className="mt-4 bg-green-700 text-white font-semibold px-6 py-3 rounded-full w-fit hover:bg-green-800 transition"
-            >
-              Read More
-            </Link>
           </div>
         </div>
       </section>
@@ -210,7 +212,7 @@ export default function Home() {
       <section className="w-full py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 text-center" data-aos="fade-up">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-12">
-            Organisation <span className="text-green-600">Objectives</span>
+            Organization <span className="text-green-600">Objectives</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
             {[
@@ -294,7 +296,8 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/membership"
+              href="https://forms.gle/fKs6zZpsw5zzgRUu6"
+              target="blank"
               className="px-8 py-3 rounded-full bg-white text-green-700 font-semibold shadow-lg hover:bg-gray-100 transition duration-300"
             >
               Become a Member

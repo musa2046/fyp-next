@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import { getAchievements, getAwards } from "../../../config/apis";
+import { PreFooter } from "@/components/PreFooter";
 
 const Achievements = () => {
   useEffect(() => {
@@ -234,6 +235,7 @@ const Achievements = () => {
           )}
         </div>
       </section>
+      <PreFooter btnText="See Latest News" link="/news" />
     </main>
   );
 };
