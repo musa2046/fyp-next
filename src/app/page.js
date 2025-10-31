@@ -84,7 +84,7 @@ export default function HomePage() {
   </div>
 
   {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+  <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/70"></div>
 
   {/* Hero Content */}
   <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center" data-aos="fade-up">
@@ -338,33 +338,21 @@ export default function HomePage() {
   </div>
 
   {/* Responsive Gallery */}
-  <div
-    className="
-      flex flex-wrap justify-center gap-3
-      w-full max-w-6xl mx-auto mt-10
-      px-3 sm:px-6
-    "
-  >
+ <div className="flex items-center gap-2 h-[400px] w-full max-w-4xl mt-10 mx-auto"
+data-aos="fade-up">
     {data?.galleryImages?.slice(0, 6).map((img) => (
-      <div
-        key={img?._id}
-        className="
-          relative group overflow-hidden rounded-xl
-          w-[48%] sm:w-[30%] md:w-[23%] lg:w-[18%]
-          h-[180px] sm:h-[220px] md:h-[260px] lg:h-[320px]
-          transition-all duration-500 hover:scale-105 hover:z-10
-        "
-        data-aos="zoom-in"
-      >
-        <img
-          src={img.image?.url}
-          alt={img.title}
-          className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
+        <div
+          key={img?._id}
+          className="relative group grow transition-all w-56 rounded-lg overflow-hidden h-[400px] duration-500 hover:w-full"
+        >
+            <img
+              className="h-full w-full object-cover object-center"
+              src={img.image?.url}
+              alt={img.title}
+            />
+        </div>
     ))}
-  </div>
+        </div>
 
   <div
     className="mt-12 flex justify-center"
